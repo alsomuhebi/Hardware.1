@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hardware-Checkliste</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f7fa;
+      color: #333;
+      margin: 0;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+    }
+    h1, h2 {
+      color: #2a5d9f;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+    }
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid #ddd;
+    }
+    select, input[type="text"], input[type="file"], input[type="date"] {
+      width: 100%;
+      padding: 0.4rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .zustand {
+      padding: 1rem;
+      background: #eef5ff;
+      border-left: 6px solid #2a5d9f;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+    .footer {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      margin-top: 2rem;
+    }
+    .highlight-A { color: green; font-weight: bold; }
+    .highlight-B { color: goldenrod; font-weight: bold; }
+    .highlight-C { color: red; font-weight: bold; }
+    .file-note {
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 0.3rem;
+    }
+    .battery-good { background-color: #00ff00; color: black; font-weight: bold; }
+    .battery-ok { background-color: #ffff00; color: black; font-weight: bold; }
+    .battery-bad { background-color: #ff0000; color: white; font-weight: bold; }
+    .export-btn {
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      background: #2a5d9f;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .export-btn:hover {
+      background: #1e467a;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="hardware-check">
+    <h1>🖥️ Hardware-Checkliste</h1>
+
+    <h2>🔍 Allgemeiner Check</h2>
+    <table id="checklist">
+      <tr>
+        <th>Prüfpunkte</th>
+        <th>Bewertung</th>
+        <th>Kommentar / Datei</th>
+      </tr>
+      <tr>
+        <td>Sichtprüfung (Gehäuse, Display)</td>
+        <td><select class="bewertung">
+          <option>Einwandfrei</option>
+          <option>Kratzer</option>
+          <option>Bruch</option>
+          <option>Nicht geprüft</option>
+        </select></td>
+        <td><input type="text" placeholder="Kommentar" /></td>
+      </tr>
+      <tr>
+        <td>Akku-Check</td>
+        <td><select class="bewertung">
+          <option class="battery-good">&gt; 80% Good</option>
+          <option class="battery-ok">&gt; 50% Ok</option>
+          <option class="battery-bad">&lt; 50% Bad</option>
+          <option>Nicht getestet</option>
+        </select></td>
+        <td>
+          <input type="file" accept=".pdf,.jpg,.png" />
+          <div class="file-note">Lade ein Battery-Check-Ergebnis hoch</div>
+        </td>
+      </tr>
+      <tr>
+        <td>Anschlüsse (USB, HDMI...)</td>
+        <td><select class="bewertung">
+          <option>Alle funktionieren</option>
+          <option>Teilweise defekt</option>
+          <option>Nicht getestet</option>
+        </select></td>
+        <td><input type="text" placeholder="Kommentar" /></td>
+      </tr>
+    </table>
+
+    <h2>🧓 Zusatzcheck (&gt; 3 Jahre)</h2>
+    <table>
+      <tr>
+        <td>SSD-Test</td>
+        <td><select class="bewertung">
+          <option>Gesund</option>
+          <option>Fehler erkannt</option>
+          <option>Nicht getestet</option>
+        </select></td>
+        <td>
+          <input type="file" accept=".pdf,.jpg,.png" />
+          <div class="file-note">SSD-Check-Datei hochladen</div>
+        </td>
+      </tr>
+      <tr>
+        <td>RAM-Test</td>
+        <td><select class="bewertung">
+          <option>Gesund</option>
+          <option>Fehler erkannt</option>
+          <option>Nicht getestet</option>
+        </select></td>
+        <td>
+          <input type="file" accept=".pdf,.jpg,.png" />
+          <div class="file-note">RAM-Test-Datei hochladen</div>
+        </td>
+      </tr>
+    </table>
+
+    <h2>📦 Zustand des Geräts</h2>
+    <table>
+      <tr>
+        <td colspan="3">
+          <select id="zustand-manual">
+            <option disabled selected>Bitte wählen...</option>
+            <option>Sehr guter Zustand (neuwertig, keine Gebrauchsspuren)</option>
+            <option>Guter Zustand (leichte Gebrauchsspuren, voll funktionsfähig)</option>
+            <option>Defekt / Nicht einsatzbereit – bitte IT benachrichtigen</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+
+    <div class="footer">
+      📅 Datum: <input type="date" />
+      👤 Prüfer: <input type="text" placeholder="Name" />
+    </div>
+
+    <button class="export-btn" onclick="window.print()">📄 Als PDF speichern</button>
+  </div>
+</body>
+</html>
